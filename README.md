@@ -1,14 +1,16 @@
 **Reference:** [Anthropic Academy Official Site](https://anthropic.skilljar.com/)
+
 **Reference:** [Anthropic Academy Official Site](https://anthropic.skilljar.com/)
+
 **Reference:** [Anthropic Academy Official Site](https://anthropic.skilljar.com/)
 
 
 
-# 🤖 Anthropic Academy Dissected
+# Anthropic Academy Dissected
 
 This repository is a systematic "deep dive" into the entire curriculum of the [Anthropic Academy](https://anthropic.skilljar.com/). I am dissecting every course in order of increasing complexity to master the Claude ecosystem—from basic prompting to production-grade AI infrastructure.
 
-## 📈 Learning Path & Progress
+## Learning Path & Progress
 
 I have reorganized the courses by difficulty level and logical progression.
 
@@ -71,7 +73,7 @@ root/
 | 📅 | [**AI Fluency for Nonprofits**](https://anthropic.skilljar.com/ai-fluency-for-nonprofits) | Mission-driven efficiency with AI |
 | 📅 | [**Teaching AI Fluency**](https://anthropic.skilljar.com/teaching-ai-fluency) | Assessment & instructor-led training |
 
-## 🧪 Laboratory Structure
+## Laboratory Structure
 Each course module is archived with:
 - **`concepts.md`**: Core theory and key takeaways.
 - **`experiments/`**: Hands-on scripts, prompt iterations, and test cases.
