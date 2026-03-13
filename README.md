@@ -4,11 +4,13 @@
 
 **Reference:** [Anthropic Academy Official Site](https://anthropic.skilljar.com/)
 
-
+<br>
 
 # Anthropic Academy Dissected
 
 This repository is a systematic "deep dive" into the entire curriculum of the [Anthropic Academy](https://anthropic.skilljar.com/). I am dissecting every course in order of increasing complexity to master the Claude ecosystem—from basic prompting to production-grade AI infrastructure.
+
+<br>
 
 ## Learning Path & Progress
 
@@ -41,6 +43,7 @@ root/
 | :---: | :--- | :--- |
 | 🏃 | [**Claude 101**](https://anthropic.skilljar.com/page/claude-101) | Basic features & everyday task automation |
 | 📅 | [**AI Fluency: Framework & Foundations**](https://anthropic.skilljar.com/page/ai-fluency-framework-foundations) | Core principles of AI collaboration |
+<br>
 
 ### Phase 2: Workflow & Automation (Level: Intermediate)
 *Integrating AI directly into the development environment.*
@@ -48,6 +51,7 @@ root/
 | :--- | :--- | :--- |
 | 📅 | [**Claude Code in Action**](https://anthropic.skilljar.com/claude-code-in-action) | Streamlining development with CLI tools |
 | 📅 | [**Introduction to Agent Skills**](https://anthropic.skilljar.com/introduction-to-agent-skills) | Building reusable skills for Claude Code |
+<br>
 
 ### Phase 3: Developer Deep Dive (Level: Advanced)
 *High-level technical implementation and architectural patterns.*
@@ -56,6 +60,7 @@ root/
 | 📅 | [**Building with the Claude API**](https://anthropic.skilljar.com/page/building-with-the-claude-api) | Full-scale model integration & API mastery |
 | 📅 | [**Introduction to Model Context Protocol**](https://anthropic.skilljar.com/introduction-to-model-context-protocol) | Building MCP servers and clients from scratch |
 | 📅 | [**Model Context Protocol: Advanced Topics**](https://anthropic.skilljar.com/model-context-protocol-advanced-topics) | Production patterns & transport mechanisms |
+<br>
 
 ### Phase 4: Cloud Infrastructure (Level: Expert)
 *Deploying Claude within enterprise cloud environments.*
@@ -63,6 +68,7 @@ root/
 | :--- | :--- | :--- |
 | 📅 | [**Claude with Amazon Bedrock**](https://anthropic.skilljar.com/page/claude-with-amazon-bedrock) | AWS-native AI implementation |
 | 📅 | [**Claude with Google Cloud's Vertex AI**](https://anthropic.skilljar.com/page/claude-with-google-cloud-vertex-ai) | GCP-native AI implementation |
+<br>
 
 ### Phase 5: Domain-Specific AI Fluency (Level: Specialized)
 *Adapting AI fluency for specific professional sectors.*
@@ -72,6 +78,8 @@ root/
 | 📅 | [**AI Fluency for Educators**](https://anthropic.skilljar.com/ai-fluency-for-educators) | Strategy for instructional design |
 | 📅 | [**AI Fluency for Nonprofits**](https://anthropic.skilljar.com/ai-fluency-for-nonprofits) | Mission-driven efficiency with AI |
 | 📅 | [**Teaching AI Fluency**](https://anthropic.skilljar.com/teaching-ai-fluency) | Assessment & instructor-led training |
+
+<br>
 
 ## Laboratory Structure
 Each course module is archived with:
