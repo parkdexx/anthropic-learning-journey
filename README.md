@@ -1,3 +1,9 @@
+**Reference:** [Anthropic Academy Official Site](https://anthropic.skilljar.com/)
+**Reference:** [Anthropic Academy Official Site](https://anthropic.skilljar.com/)
+**Reference:** [Anthropic Academy Official Site](https://anthropic.skilljar.com/)
+
+
+
 # 🤖 Anthropic Academy Dissected
 
 This repository is a systematic "deep dive" into the entire curriculum of the [Anthropic Academy](https://anthropic.skilljar.com/). I am dissecting every course in order of increasing complexity to master the Claude ecosystem—from basic prompting to production-grade AI infrastructure.
@@ -7,6 +13,7 @@ This repository is a systematic "deep dive" into the entire curriculum of the [A
 I have reorganized the courses by difficulty level and logical progression.
 
 
+```text
 root/
 ├── README.md
 └── src/
@@ -23,6 +30,7 @@ root/
     ├── 11-ai-fluency-educators/
     ├── 12-ai-fluency-nonprofits/
     └── 13-teaching-ai-fluency/
+```
 
 
 ### Phase 1: Foundations & AI Fluency (Level: Entry)
