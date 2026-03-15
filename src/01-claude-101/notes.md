@@ -29,7 +29,7 @@
 2. **Define the Task**: Describe exactly what action you want the AI to take.
 3. **Specify Rules**
 4. **Add Context**: Attach materials such as existing documents or images.
-5. **Model Selection**: Select the appropriate model for the question, which may relate to cost.
+5. **Model Selection**: Select the appropriate model for the question (this may relate to cost).
 6. **Additional Actions**:
     * Toggle **Extended Thinking Mode** on/off.
     * Toggle **Research Mode** on/off.
@@ -47,4 +47,18 @@
 ## RAG (Retrieval Augmented Generation) at Claude.ai
 * **Definition**: A technology that helps the AI generate more accurate and highly relevant answers.
 * **Application**: Adding a **Knowledge Base**—such as reference documents, background data, examples, technical manuals, and specifications—to a project.
+
+---
+
+## Artifacts
+![artifacts](./res/gimhae_weather_march2026.PNG)
+
+---
+
+## Skills
+* **Description**: Instructions, scripts, and resources that Claude dynamically calls to perform specific tasks.
+* **Key Concept**: **Projects** store knowledge, while **Skills** perform actions.
+
+![skills](./res/weather-viz.PNG)
+
 

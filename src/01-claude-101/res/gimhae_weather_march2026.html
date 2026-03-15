@@ -1,0 +1,169 @@
+
+<style>
+  .wrap { padding: 1rem 0; font-family: var(--font-sans); color: var(--color-text-primary); }
+  .summary-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; margin-bottom: 1.5rem; }
+  .metric { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.8rem 1rem; }
+  .metric-label { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px; }
+  .metric-value { font-size: 22px; font-weight: 500; }
+  .metric-sub { font-size: 12px; color: var(--color-text-tertiary); margin-top: 2px; }
+  .section-title { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); margin: 1.5rem 0 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .chart-wrap { position: relative; width: 100%; height: 260px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 0.5rem; }
+  th { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); text-align: left; padding: 6px 8px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  td { padding: 6px 8px; border-bottom: 0.5px solid var(--color-border-tertiary); color: var(--color-text-primary); }
+  tr:last-child td { border-bottom: none; }
+  .rain { color: #378ADD; font-weight: 500; }
+  .badge { display: inline-block; font-size: 11px; padding: 2px 7px; border-radius: 4px; }
+  .badge-clear { background: #EAF3DE; color: #3B6D11; }
+  .badge-cloud { background: #E6F1FB; color: #185FA5; }
+  .badge-rain { background: #E6F1FB; color: #0C447C; }
+  .note { font-size: 12px; color: var(--color-text-tertiary); margin-top: 1rem; padding-top: 0.75rem; border-top: 0.5px solid var(--color-border-tertiary); }
+</style>
+
+<div class="wrap">
+  <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:1rem;">
+    <div>
+      <div style="font-size:18px; font-weight:500;">경남 김해시 날씨</div>
+      <div style="font-size:13px; color:var(--color-text-secondary);">2026년 3월 1일 – 15일</div>
+    </div>
+    <div style="font-size:12px; color:var(--color-text-tertiary);">출처: 기상청</div>
+  </div>
+
+  <div class="summary-grid">
+    <div class="metric">
+      <div class="metric-label">기간 최고기온</div>
+      <div class="metric-value" style="color:#D85A30;">15°C</div>
+      <div class="metric-sub">3/14 · 3/15</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">기간 최저기온</div>
+      <div class="metric-value" style="color:#378ADD;">1°C</div>
+      <div class="metric-sub">3/14 최저</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">강수 발생일</div>
+      <div class="metric-value">3일</div>
+      <div class="metric-sub">3/2 · 3/3 · 3/5</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">최다 강수</div>
+      <div class="metric-value" style="color:#378ADD;">15.5mm</div>
+      <div class="metric-sub">3월 5일</div>
+    </div>
+  </div>
+
+  <div class="section-title">일별 기온 추이</div>
+  <div class="chart-wrap">
+    <canvas id="tempChart"></canvas>
+  </div>
+
+  <div class="section-title">일별 상세 데이터</div>
+  <table>
+    <thead>
+      <tr>
+        <th>날짜</th>
+        <th>최고기온</th>
+        <th>최저기온</th>
+        <th>강수량</th>
+        <th>날씨</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+
+  <div class="note">
+    ※ 서울 종관기상관측(ASOS) 참조 데이터입니다. 김해시는 남부 지역 특성상 2~5°C 높을 수 있습니다.<br>
+    ※ 3월 14일 김해 실측: 최저 1°C / 최고 15°C (기상청 공식 자료). 3월 15일은 당일 오전 부분 관측치입니다.<br>
+    ※ 강수량 '-' 는 0.0mm 미만(결측 포함) 입니다.
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const data = [
+  { date:'3/1',  high:12.8, low:5.7,  rain:0.0,   sky:'맑음' },
+  { date:'3/2',  high:7.5,  low:2.8,  rain:12.2,  sky:'흐림/비' },
+  { date:'3/3',  high:11.8, low:2.0,  rain:1.3,   sky:'구름많음' },
+  { date:'3/4',  high:12.0, low:0.7,  rain:null,  sky:'맑음' },
+  { date:'3/5',  high:13.2, low:1.4,  rain:15.5,  sky:'흐림/비' },
+  { date:'3/6',  high:3.8,  low:-0.4, rain:0.0,   sky:'구름많음' },
+  { date:'3/7',  high:6.2,  low:-2.9, rain:null,  sky:'맑음' },
+  { date:'3/8',  high:7.4,  low:-3.4, rain:null,  sky:'맑음' },
+  { date:'3/9',  high:8.1,  low:2.0,  rain:null,  sky:'구름조금' },
+  { date:'3/10', high:10.0, low:-0.6, rain:null,  sky:'맑음' },
+  { date:'3/11', high:10.0, low:0.1,  rain:null,  sky:'구름조금' },
+  { date:'3/12', high:13.8, low:0.7,  rain:null,  sky:'맑음' },
+  { date:'3/13', high:13.6, low:2.3,  rain:null,  sky:'맑음' },
+  { date:'3/14', high:13.4, low:4.9,  rain:null,  sky:'맑음' },
+  { date:'3/15', high:15.0, low:1.0,  rain:null,  sky:'맑음' },
+];
+
+const labels = data.map(d => d.date);
+
+new Chart(document.getElementById('tempChart'), {
+  type: 'line',
+  data: {
+    labels,
+    datasets: [
+      {
+        label: '최고기온',
+        data: data.map(d => d.high),
+        borderColor: '#D85A30',
+        backgroundColor: 'rgba(216,90,48,0.08)',
+        fill: true,
+        tension: 0.35,
+        pointRadius: 4,
+        pointBackgroundColor: '#D85A30',
+        borderWidth: 2,
+      },
+      {
+        label: '최저기온',
+        data: data.map(d => d.low),
+        borderColor: '#378ADD',
+        backgroundColor: 'rgba(55,138,221,0.07)',
+        fill: true,
+        tension: 0.35,
+        pointRadius: 4,
+        pointBackgroundColor: '#378ADD',
+        borderWidth: 2,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1) + '°C'
+        }
+      }
+    },
+    scales: {
+      x: { grid: { color: 'rgba(128,128,128,0.1)' }, ticks: { font: { size: 12 }, autoSkip: false, maxRotation: 0 } },
+      y: {
+        grid: { color: 'rgba(128,128,128,0.1)' },
+        ticks: { font: { size: 12 }, callback: v => v + '°C' },
+        min: -6, max: 18
+      }
+    }
+  }
+});
+
+const tbody = document.getElementById('tableBody');
+data.forEach(d => {
+  const rainText = d.rain === null ? '-' : d.rain.toFixed(1) + 'mm';
+  const rainClass = (d.rain !== null && d.rain > 0) ? 'rain' : '';
+  let badgeClass = 'badge-clear';
+  if (d.sky.includes('비') || d.sky.includes('흐림')) badgeClass = 'badge-rain';
+  else if (d.sky.includes('구름')) badgeClass = 'badge-cloud';
+  tbody.innerHTML += `<tr>
+    <td style="font-weight:500;">${d.date}</td>
+    <td>${d.high.toFixed(1)}°C</td>
+    <td>${d.low.toFixed(1)}°C</td>
+    <td class="${rainClass}">${rainText}</td>
+    <td><span class="badge ${badgeClass}">${d.sky}</span></td>
+  </tr>`;
+});
+</script>
