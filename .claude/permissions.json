@@ -1,0 +1,9 @@
+{
+  "version": "1.0",
+  "permissions": {
+    "Edit": "auto",
+    "Write": "auto",
+    "Bash": "ask"
+  },
+  "description": "Project-specific permissions for anthropic-learning-journey. Edit and Write tools are auto-approved for documentation updates. Bash requires confirmation for safety."
+}
