@@ -93,3 +93,5 @@ Each course module is archived with:
 
 ---
 **Reference:** [Anthropic Academy Official Site](https://anthropic.skilljar.com/)
+
+이 문구는 Claude Code와 MCP Server를 통해 자동으로 추가되었습니다.
