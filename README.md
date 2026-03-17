@@ -41,8 +41,8 @@ root/
 *Foundational concepts for interacting with AI effectively and ethically.*
 | Status | Course Name | Notes |
 | :---: | :--- | :--- |
-| v | [**Claude 101**](https://anthropic.skilljar.com/claude-101) | Basic features & everyday task automation |
-| 📅 | [**AI Fluency: Framework & Foundations**](https://anthropic.skilljar.com/ai-fluency-framework-foundations) | Core principles of AI collaboration |
+| ✅ | [**Claude 101**](https://anthropic.skilljar.com/claude-101) | Basic features & everyday task automation |
+| ✅ | [**AI Fluency: Framework & Foundations**](https://anthropic.skilljar.com/ai-fluency-framework-foundations) | Core principles of AI collaboration |
 
 <br>
 
