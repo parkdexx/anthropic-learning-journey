@@ -49,7 +49,7 @@ root/
 ### Phase 2: Workflow & Automation (Level: Intermediate)
 *Integrating AI directly into the development environment.*
 | Status | Course Name | Notes |
-| :--- | :--- | :--- |
+| :---: | :--- | :--- |
 | ✅ | [**Claude Code in Action**](https://anthropic.skilljar.com/claude-code-in-action) | Streamlining development with CLI tools |
 | ✅ | [**Introduction to Agent Skills**](https://anthropic.skilljar.com/introduction-to-agent-skills) | Building reusable skills for Claude Code |
 
@@ -58,7 +58,7 @@ root/
 ### Phase 3: Developer Deep Dive (Level: Advanced)
 *High-level technical implementation and architectural patterns.*
 | Status | Course Name | Notes |
-| :--- | :--- | :--- |
+| :---: | :--- | :--- |
 | 📅 | [**Building with the Claude API**](https://anthropic.skilljar.com/claude-with-the-anthropic-api) | Full-scale model integration & API mastery |
 | 📅 | [**Introduction to Model Context Protocol**](https://anthropic.skilljar.com/introduction-to-model-context-protocol) | Building MCP servers and clients from scratch |
 | 📅 | [**Model Context Protocol: Advanced Topics**](https://anthropic.skilljar.com/model-context-protocol-advanced-topics) | Production patterns & transport mechanisms |
@@ -68,7 +68,7 @@ root/
 ### Phase 4: Cloud Infrastructure (Level: Expert)
 *Deploying Claude within enterprise cloud environments.*
 | Status | Course Name | Notes |
-| :--- | :--- | :--- |
+| :---: | :--- | :--- |
 | 📅 | [**Claude with Amazon Bedrock**](https://anthropic.skilljar.com/claude-in-amazon-bedrock) | AWS-native AI implementation |
 | 📅 | [**Claude with Google Cloud's Vertex AI**](https://anthropic.skilljar.com/claude-with-google-vertex) | GCP-native AI implementation |
 
@@ -77,7 +77,7 @@ root/
 ### Phase 5: Domain-Specific AI Fluency (Level: Specialized)
 *Adapting AI fluency for specific professional sectors.*
 | Status | Course Name | Notes |
-| :--- | :--- | :--- |
+| :---: | :--- | :--- |
 | 📅 | [**AI Fluency for Students**](https://anthropic.skilljar.com/ai-fluency-for-students) | Enhancing learning & career planning |
 | 📅 | [**AI Fluency for Educators**](https://anthropic.skilljar.com/ai-fluency-for-educators) | Strategy for instructional design |
 | 📅 | [**AI Fluency for Nonprofits**](https://anthropic.skilljar.com/ai-fluency-for-nonprofits) | Mission-driven efficiency with AI |
