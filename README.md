@@ -51,7 +51,7 @@ root/
 | Status | Course Name | Notes |
 | :--- | :--- | :--- |
 | ✅ | [**Claude Code in Action**](https://anthropic.skilljar.com/claude-code-in-action) | Streamlining development with CLI tools |
-| 📅 | [**Introduction to Agent Skills**](https://anthropic.skilljar.com/introduction-to-agent-skills) | Building reusable skills for Claude Code |
+| ✅ | [**Introduction to Agent Skills**](https://anthropic.skilljar.com/introduction-to-agent-skills) | Building reusable skills for Claude Code |
 
 <br>
 
