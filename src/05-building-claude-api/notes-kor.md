@@ -38,4 +38,6 @@ Anthropic 은 사용자의 요청을 받으면 아래의 프로세스를 밟음
 2. Anthropic 의 대답
 
 
-## 
+## Anthropic API 기타
+1. Anthropic API는 system 파라미터에 None을 허용하지 않고,
+  아예 키 자체가 없어야 합니다.
