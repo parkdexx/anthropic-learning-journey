@@ -69,11 +69,12 @@ def add_assistant_message(messages, text):
 
 
 #  Anthropic API는 system 파라미터에 None을 허용하지 않고, 아예 키 자체가 없어야 합니다.
-def chat(messages, system=None):
+def chat(messages, system=None, temperature=0.5):
     params = {
         "model": model,
         "max_tokens": 1000,
-        "messages": messages
+        "messages": messages,
+        "temperature": temperature
     }
 
     if system:
@@ -110,24 +111,32 @@ print("채팅을 시작합니다. 종료하려면 Ctrl+C를 누르세요.\n")
 try:
     isFirst = True
     system = None
+    temperature = 0.5
 
     while True:
 
         # 채팅이 처음 시작되면 프롬프트를 선택적으로 입력 받음
         if isFirst:
-            system = input("시스템 프롬프트 입력(없으면 Enter): ")
             isFirst = False  
 
+            system = input("시스템 프롬프트 입력(없으면 Enter): ")
             if system == "":
                 system = None
 
-        user_input = input("사용자: ")
+            temperature = input("온도 입력(없으면 0.5): ")
+            if temperature == "":
+                temperature = 0.5
+            else:
+                temperature = float(temperature)            
+
+        # 
+        user_input = input("사용자 질문 : ")
         add_user_message(messages, user_input)
 
         # 시스템 프롬프트를 매개변수로 날림
         answer = chat(messages, system)
         add_assistant_message(messages, answer)
-        print(f"AI: {answer}\n")
+        print(f"AI 답변 : {answer}\n")
 
 except KeyboardInterrupt:
     print("\n\n채팅을 종료합니다.")
