@@ -112,32 +112,57 @@ try:
     isFirst = True
     system = None
     temperature = 0.5
+    isStreaming = True
 
     while True:
-
-        # 채팅이 처음 시작되면 프롬프트를 선택적으로 입력 받음
+        
         if isFirst:
             isFirst = False  
 
+            # 시스템 프롬프트를 선택적으로 입력 받음
             system = input("시스템 프롬프트 입력(없으면 Enter): ")
             if system == "":
                 system = None
 
+            # 온도 입력 받기
             temperature = input("온도 입력(없으면 0.5): ")
             if temperature == "":
                 temperature = 0.5
             else:
-                temperature = float(temperature)            
+                temperature = float(temperature)          
 
-        # 
+            # 스트리밍 응답 사용 여부 입력 받기
+            isStreaming = input("스트리밍 응답 사용(y/n, 기본값: y): ").lower()
+            if isStreaming == "":
+                isStreaming = True
+            else:
+                isStreaming = isStreaming == "y"  
+
+        
+
         user_input = input("사용자 질문 : ")
         add_user_message(messages, user_input)
 
-        # 시스템 프롬프트를 매개변수로 날림
-        answer = chat(messages, system)
-        add_assistant_message(messages, answer)
-        print(f"AI 답변 : {answer}\n")
 
+        if(isStreaming):            
+            # 스트리밍 응답 받기
+            with client.messages.stream(
+                model= model,
+                max_tokens=1000,
+                messages= messages
+            )  as stream :
+                for text in stream.text_stream:
+                    print("AI 답변 : ", end="")
+                    print(text, end="")
+                    print("\n")
+                #final_message = stream.get_final_message() #메시지 완성본
+        else:
+            # 일반 응답 받기
+            answer = chat(messages, system)
+            add_assistant_message(messages, answer)
+            print(f"AI 답변 : {answer}\n")
+
+        
 except KeyboardInterrupt:
     print("\n\n채팅을 종료합니다.")
 
