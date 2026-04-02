@@ -2,6 +2,7 @@ import os
 import sys
 import anthropic
 import json
+from statistics import mean
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -73,6 +74,10 @@ def run_eval(dataset):
     for test_case in dataset:
         result = run_test_case(test_case)
         results.append(result)
+
+    
+    average_score = mean([result["score"] for result in results])
+    print(f"Average score: {average_score} \n\n")
     
     return results
 
@@ -81,13 +86,16 @@ def run_test_case(test_case):
     """Calls run_prompt, then grades the result"""
     output = run_prompt(test_case)
     
-    # TODO - Grading
-    score = 10
+    # Grade the output
+    model_grade = grade_by_model(test_case, output)
+    score = model_grade["score"]
+    reasoning = model_grade["reasoning"]
     
     return {
-        "output": output,
-        "test_case": test_case,
-        "score": score
+        #"output": output, 
+        "test_case": test_case, 
+        "score": score,
+        "reasoning": reasoning
     }
 
 
@@ -105,6 +113,44 @@ Please solve the following task:
     return output
 
 
+def grade_by_model(test_case, output):
+
+    # Create evaluation prompt
+    eval_prompt = f"""
+    You are an expert code reviewer. Evaluate this AI-generated solution.
+    
+    Original Task:
+    <task>{test_case["task"]}</task>
+
+    Solution to Evaludate:
+    <solution>{output}</solution>
+    
+    Output Format
+    Provide your evaluation as a structured JSON object with:
+    - "strengths": An array of 1-3 key strengths
+    - "weaknesses": An array of 1-3 key areas for improvement  
+    - "reasoning": A concise explanation of your assessment
+    - "score": A number between 1-10
+
+    Respond with JSON. Keep your response cincise and direct.
+    Example response shape:
+    {{
+        "strengths": string[],
+        "weaknesses": string[],
+        "reasoning": string,
+        "score": number
+    }}
+
+    """
+    
+    messages = []
+    add_user_message(messages, eval_prompt)
+    add_assistant_message(messages, "```json")
+    
+    eval_text = chat(messages, stop_sequences=["```"])
+    return json.loads(eval_text)
+
+
 try:
     # prompt ver1
     # dataset = generate_dataset()
@@ -119,7 +165,7 @@ try:
         dataset = json.load(f)
 
     results = run_eval(dataset)
-    print(results)
+    print(json.dumps(results, indent=2))
 
 except Exception as e:
     print(e)
