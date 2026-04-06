@@ -164,3 +164,53 @@ XML 태그는 다음과 같은 경우에 가장 유용합니다.
 4.최종 응답: 검색된 데이터를 클로드에게 다시 보내면, 클로드는 원래 질문과 새로운 데이터를 모두 사용하여 완전한 응답을 생성합니다.
 
 
+## 도구(tool) 함수 작성 후에는, Claude 에게 설명하기 위한 json 스키마가 필요 함
+- 아래와 같이 작성하는게 아름다운 형태
+- 함수만 내가 작성하고, json 스키마는 ai 한테 시켜서 받는게 좋겠다
+
+```
+from anthropic.types import ToolParam
+
+def get_current_datetime(date_format="%Y-%m-%d %H:%M:%S"):
+    if not date_format:
+        raise ValueError("date_format cannot be empty")
+    return datetime.now().strftime(date_format)
+
+get_current_datetime_schema = ToolParam({
+    "name": "get_current_datetime",
+    "description": "Returns the current date and time formatted according to the specified format",
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "date_format": {
+                "type": "string",
+                "description": "A string specifying the format of the returned datetime. Uses Python's strftime format codes.",
+                "default": "%Y-%m-%d %H:%M:%S"
+            }
+        },
+        "required": []
+    }
+})
+```
+
+
+## 앞서 작성한 스키마를 claude api 호출에 사용하는 예시
+함수 자체를 던지는게 아니고,
+
+스키마를 던지는게 핵심 `tools=[get_current_datetime_schema],`
+```
+messages = []
+messages.append({
+    "role": "user",
+    "content": "What is the exact time, formatted as HH:MM:SS?"
+})
+
+response = client.messages.create(
+    model=model,
+    max_tokens=1000,
+    messages=messages,
+    tools=[get_current_datetime_schema],
+)
+```
+
+
