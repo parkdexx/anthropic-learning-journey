@@ -148,69 +148,25 @@ XML 태그는 다음과 같은 경우에 가장 유용합니다.
 
 예시는 특히 다음과 같은 경우에 유용합니다.
 
-예외적인 경우 또는 특수한 시나리오 포착
-복잡한 출력 형식(예: 특정 JSON 구조) 정의
-원하는 스타일이나 톤을 정확하게 보여줍니다.
-모호한 입력값을 처리하는 방법을 보여줍니다.
+- 예외적인 경우 또는 특수한 시나리오 포착
+- 복잡한 출력 형식(예: 특정 JSON 구조) 정의
+- 원하는 스타일이나 톤을 정확하게 보여줍니다.
+- 모호한 입력값을 처리하는 방법을 보여줍니다.
 
 
-## 도구
-1. 초기 요청: 클로드에게 질문과 함께 외부 소스에서 추가 데이터를 얻는 방법에 대한 지침을 보냅니다.
-
-2. 도구 요청: 클로드는 질문을 분석하고 추가 정보가 필요하다고 판단한 후, 필요한 데이터에 대한 구체적인 정보를 요청합니다.
-
-3. 데이터 검색: 서버는 외부 API 또는 데이터베이스에서 요청된 정보를 가져오기 위해 코드를 실행합니다.
-
-4.최종 응답: 검색된 데이터를 클로드에게 다시 보내면, 클로드는 원래 질문과 새로운 데이터를 모두 사용하여 완전한 응답을 생성합니다.
-
-
-## 도구(tool) 함수 작성 후에는, Claude 에게 설명하기 위한 json 스키마가 필요 함
-- 아래와 같이 작성하는게 아름다운 형태
-- 함수만 내가 작성하고, json 스키마는 ai 한테 시켜서 받는게 좋겠다
-
+## Fine grained 도구
 ```
-from anthropic.types import ToolParam
-
-def get_current_datetime(date_format="%Y-%m-%d %H:%M:%S"):
-    if not date_format:
-        raise ValueError("date_format cannot be empty")
-    return datetime.now().strftime(date_format)
-
-get_current_datetime_schema = ToolParam({
-    "name": "get_current_datetime",
-    "description": "Returns the current date and time formatted according to the specified format",
-    "input_schema": {
-        "type": "object",
-        "properties": {
-            "date_format": {
-                "type": "string",
-                "description": "A string specifying the format of the returned datetime. Uses Python's strftime format codes.",
-                "default": "%Y-%m-%d %H:%M:%S"
-            }
-        },
-        "required": []
-    }
-})
-```
-
-
-## 앞서 작성한 스키마를 claude api 호출에 사용하는 예시
-함수 자체를 던지는게 아니고,
-
-스키마를 던지는게 핵심 `tools=[get_current_datetime_schema],`
-```
-messages = []
-messages.append({
-    "role": "user",
-    "content": "What is the exact time, formatted as HH:MM:SS?"
-})
-
-response = client.messages.create(
-    model=model,
-    max_tokens=1000,
-    messages=messages,
-    tools=[get_current_datetime_schema],
+run_conversation(
+    messages, 
+    tools=[save_article_schema], 
+    fine_grained=True 
 )
 ```
+fine_grained=True 를 하게 되면, 아래의 상황에 대응이 가능하다
+
+- 도구 인자 생성 과정에서 사용자의 실시간 진행 상황을 보여줘야 합니다.
+- 부분 도구 결과 처리를 가능한 한 빨리 시작하고 싶을 것입니다.
+- 버퍼링 지연은 사용자 경험에 부정적인 영향을 미칩니다.
+- 당신은 견고한 JSON 오류 처리를 구현하는 데 능숙합니다.
 
 
