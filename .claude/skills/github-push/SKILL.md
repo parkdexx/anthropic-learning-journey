@@ -5,7 +5,8 @@ description:
  - 사용자가 github 에 push 를 요청하면 사용.
  - 깃 푸시해줘, 깃허브 푸시해줘, git push 해줘 라고 줄여 말할 수 있음.
  - 연결된 레포지토리에 add → commit → push 를 한 번에 수행함.
- - 푸시 계정은 반드시 soohyeok.park@gmail.com 으로 진행
+ - 푸시 계정은 반드시 soohyeok.park@gmail.com 으로 진행.
+ - git config 의 soohyeok.park@shinshinsa.com 으로 진행하지 말 것.
 ---
 
 ## 역할
@@ -14,7 +15,7 @@ description:
 사용자 승인 없이 즉시 실행한다.
 
 ## 고정 설정
-- **Push 계정 이메일**: `soohyeok.park@gmila.com`
+- **Push 계정 이메일**: `soohyeok.park@gmail.com`
 - **커밋 메시지**: 자동 생성 (영어, 간결하고 직관적으로)
 
 ## 실행 절차
