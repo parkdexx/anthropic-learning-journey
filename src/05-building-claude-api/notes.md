@@ -190,3 +190,76 @@ Examples are especially useful for:
 - Defining complex output formats (e.g., a specific JSON structure)
 - Demonstrating the exact style or tone you want
 - Showing how to handle ambiguous inputs
+
+---
+
+## Fine-Grained Tools
+
+```python
+run_conversation(
+    messages,
+    tools=[save_article_schema],
+    fine_grained=True
+)
+```
+
+Setting `fine_grained=True` enables **streaming of partial tool inputs** as they are generated. Use this when:
+
+- You need to show real-time progress to the user while tool arguments are being constructed
+- You want to start processing partial tool results as early as possible
+- Buffering delays negatively affect user experience
+- You are comfortable implementing robust JSON error handling for incomplete payloads
+
+---
+
+## Why Use the Text Editor Tool
+
+Modern code editors already have built-in AI assistance — so why add a separate text editor tool? It is useful when:
+
+- You are building an application that needs to **edit files programmatically**
+- You are working in an environment without a full-featured code editor
+- You want to integrate file-editing capabilities directly into a Claude-powered application
+
+In short, the **text editor tool** lets you replicate many features of an advanced AI code editor within your own application, giving you fine-grained control over how Claude interacts with the filesystem.
+
+---
+
+## Web Search Tool
+
+Define and pass the schema to enable web search:
+
+```python
+web_search_schema = {
+    "type": "web_search_20250305",
+    "name": "web_search",
+    "max_uses": 5,
+    "allowed_domains": ["nih.gov"]
+}
+```
+
+---
+
+## Choosing a Chunking Strategy
+
+The right strategy depends entirely on your use case and the guarantees your documents provide.
+
+- **Structure-based** — best when you control document formatting (e.g., internal company reports)
+- **Sentence-based** — a solid middle-ground for most text documents
+- **Size-based** — the most reliable fallback; works across all content types including code
+
+Size-based chunking with overlap is the most common production choice because it is simple, stable, and works across all document types. It consistently produces reasonable chunks without breaking your pipeline — even if the chunks aren't perfect.
+
+> There is no single "best" **chunking** strategy. The right approach depends on your specific documents, use case, and the trade-off you accept between implementation complexity and chunk quality.
+
+---
+
+## Combining Chunking Strategies
+
+When building a **RAG** pipeline, semantic search alone doesn't always yield the best results — sometimes you need exact term matches that semantic search misses. To address this, combine semantic search with lexical search using **BM25**.
+
+The key insight is that the two approaches have complementary strengths:
+
+- **Semantic search** — understands context and meaning
+- **Lexical search (BM25)** — ensures exact term matches are never missed
+
+Combining them produces a more robust retrieval system that handles both conceptual queries and specific keyword lookups effectively.
